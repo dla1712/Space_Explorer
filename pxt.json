@@ -3,7 +3,8 @@
     "description": "",
     "dependencies": {
         "device": "*",
-        "pxt-status-bar": "github:jwunderl/pxt-status-bar"
+        "pxt-status-bar": "github:jwunderl/pxt-status-bar",
+        "tilemaps": "github:microsoft/pxt-tilemaps#v1.12.0"
     },
     "files": [
         "main.blocks",
@@ -11,7 +12,9 @@
         "README.md",
         "assets.json",
         "images.g.jres",
-        "images.g.ts"
+        "images.g.ts",
+        "tilemap.g.jres",
+        "tilemap.g.ts"
     ],
     "testFiles": [
         "test.ts"
