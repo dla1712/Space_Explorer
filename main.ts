@@ -52,9 +52,10 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     ry = 0
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.EnemyFire, function (sprite, otherSprite) {
-    info.changeScoreBy(-1)
+    info.changeLifeBy(-1)
     music.bigCrash.play()
     music.setVolume(255)
+    pause(1000)
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite, otherSprite) {
     sprite.destroy(effects.disintegrate, 500)
@@ -108,6 +109,224 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Gas, function (sprite, otherSpri
     statusbar.value = 100
     otherSprite.destroy()
 })
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.EnemyFire, function (sprite, otherSprite) {
+    tiles.destroySpritesOfKind(SpriteKind.EnemyFire)
+    tiles.destroySpritesOfKind(SpriteKind.Projectile)
+    animation.runImageAnimation(
+    projectile,
+    [img`
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . 5 . . . . . . . 
+        . . . . . . 5 5 5 . . . . . . 
+        . . . . . . . 5 . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . 5 . . . . . . . 
+        . . . . . . 5 5 5 . . . . . . 
+        . . . . . 5 5 4 5 5 . . . . . 
+        . . . . . . 5 5 5 . . . . . . 
+        . . . . . . . 5 . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . 5 . . . . . . . 
+        . . . . . . 5 5 5 . . . . . . 
+        . . . . . 5 5 4 5 5 . . . . . 
+        . . . . 5 5 4 4 4 5 5 . . . . 
+        . . . . . 5 5 4 5 5 . . . . . 
+        . . . . . . 5 5 5 . . . . . . 
+        . . . . . . . 5 . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . 5 . . . . . . . 
+        . . . . . . 5 5 5 . . . . . . 
+        . . . . . 5 5 4 5 5 . . . . . 
+        . . . . 5 5 4 4 4 5 5 . . . . 
+        . . . 5 5 4 4 2 4 4 5 5 . . . 
+        . . . . 5 5 4 4 4 5 5 . . . . 
+        . . . . . 5 5 4 5 5 . . . . . 
+        . . . . . . 5 5 5 . . . . . . 
+        . . . . . . . 5 . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . 5 . . . . . . . 
+        . . . . . . 5 5 5 . . . . . . 
+        . . . . . 5 5 4 5 5 . . . . . 
+        . . . . 5 5 4 4 4 5 5 . . . . 
+        . . . 5 5 4 4 2 4 4 5 5 . . . 
+        . . 5 5 4 4 2 2 2 4 4 5 5 . . 
+        . . . 5 5 4 4 2 4 4 5 5 . . . 
+        . . . . 5 5 4 4 4 5 5 . . . . 
+        . . . . . 5 5 4 5 5 . . . . . 
+        . . . . . . 5 5 5 . . . . . . 
+        . . . . . . . 5 . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . 
+        . . . . . . . 5 . . . . . . . 
+        . . . . . . 5 5 5 . . . . . . 
+        . . . . . 5 5 4 5 5 . . . . . 
+        . . . . 5 5 4 4 4 5 5 . . . . 
+        . . . 5 5 4 4 2 4 4 5 5 . . . 
+        . . 5 5 4 4 2 2 2 4 4 5 5 . . 
+        . 5 5 4 4 2 2 . 2 2 4 4 5 5 . 
+        . . 5 5 4 4 2 2 2 4 4 5 5 . . 
+        . . . 5 5 4 4 2 4 4 5 5 . . . 
+        . . . . 5 5 4 4 4 5 5 . . . . 
+        . . . . . 5 5 4 5 5 . . . . . 
+        . . . . . . 5 5 5 . . . . . . 
+        . . . . . . . 5 . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . 5 . . . . . . . 
+        . . . . . . 5 5 5 . . . . . . 
+        . . . . . 5 5 4 5 5 . . . . . 
+        . . . . 5 5 4 4 4 5 5 . . . . 
+        . . . 5 5 4 4 2 4 4 5 5 . . . 
+        . . 5 5 4 4 2 2 2 4 4 5 5 . . 
+        . 5 5 4 4 2 2 . 2 2 4 4 5 5 . 
+        5 5 4 4 2 2 . . . 2 2 4 4 5 5 
+        . 5 5 4 4 2 2 . 2 2 4 4 5 5 . 
+        . . 5 5 4 4 2 2 2 4 4 5 5 . . 
+        . . . 5 5 4 4 2 4 4 5 5 . . . 
+        . . . . 5 5 4 4 4 5 5 . . . . 
+        . . . . . 5 5 4 5 5 . . . . . 
+        . . . . . . 5 5 5 . . . . . . 
+        . . . . . . . 5 . . . . . . . 
+        `,img`
+        . . . . . . . 5 . . . . . . . 
+        . . . . . . 5 4 5 . . . . . . 
+        . . . . . 5 4 4 4 5 . . . . . 
+        . . . . 5 4 4 2 4 4 5 . . . . 
+        . . . 5 4 4 2 2 2 4 4 5 . . . 
+        . . 5 4 4 2 2 . 2 2 4 4 5 . . 
+        . 5 4 4 2 2 . . . 2 2 4 4 5 . 
+        5 4 4 2 2 . . . . . 2 2 4 4 5 
+        . 5 4 4 2 2 . . . 2 2 4 4 5 . 
+        . . 5 4 4 2 2 . 2 2 4 4 5 . . 
+        . . . 5 4 4 2 2 2 4 4 5 . . . 
+        . . . . 5 4 4 2 4 4 5 . . . . 
+        . . . . . 5 4 4 4 5 . . . . . 
+        . . . . . . 5 4 5 . . . . . . 
+        . . . . . . . 5 . . . . . . . 
+        `,img`
+        . . . . . . . 4 . . . . . . . 
+        . . . . . . 4 4 4 . . . . . . 
+        . . . . . 4 4 2 4 4 . . . . . 
+        . . . . 4 4 2 2 2 4 4 . . . . 
+        . . . 4 4 2 2 . 2 2 4 4 . . . 
+        . . 4 4 2 2 . . . 2 2 4 4 . . 
+        . 4 4 2 2 . . . . . 2 2 4 4 . 
+        4 4 2 2 . . . . . . . 2 2 4 4 
+        . 4 4 2 2 . . . . . 2 2 4 4 . 
+        . . 4 4 2 2 . . . 2 2 4 4 . . 
+        . . . 4 4 2 2 . 2 2 4 4 . . . 
+        . . . . 4 4 2 2 2 4 4 . . . . 
+        . . . . . 4 4 2 4 4 . . . . . 
+        . . . . . . 4 4 4 . . . . . . 
+        . . . . . . . 4 . . . . . . . 
+        `,img`
+        . . . . . . . 4 . . . . . . . 
+        . . . . . . 4 2 4 . . . . . . 
+        . . . . . 4 2 2 2 4 . . . . . 
+        . . . . 4 2 2 . 2 2 4 . . . . 
+        . . . 4 2 2 . . . 2 2 4 . . . 
+        . . 4 2 2 . . . . . 2 2 4 . . 
+        . 4 2 2 . . . . . . . 2 2 4 . 
+        4 2 2 . . . . . . . . . 2 2 4 
+        . 4 2 2 . . . . . . . 2 2 4 . 
+        . . 4 2 2 . . . . . 2 2 4 . . 
+        . . . 4 2 2 . . . 2 2 4 . . . 
+        . . . . 4 2 2 . 2 2 4 . . . . 
+        . . . . . 4 2 2 2 4 . . . . . 
+        . . . . . . 4 2 4 . . . . . . 
+        . . . . . . . 4 . . . . . . . 
+        `,img`
+        . . . . . . . 2 . . . . . . . 
+        . . . . . . 2 2 2 . . . . . . 
+        . . . . . 2 2 . 2 2 . . . . . 
+        . . . . 2 2 . . . 2 2 . . . . 
+        . . . 2 2 . . . . . 2 2 . . . 
+        . . 2 2 . . . . . . . 2 2 . . 
+        . 2 2 . . . . . . . . . 2 2 . 
+        2 2 . . . . . . . . . . . 2 2 
+        . 2 2 . . . . . . . . . 2 2 . 
+        . . 2 2 . . . . . . . 2 2 . . 
+        . . . 2 2 . . . . . 2 2 . . . 
+        . . . . 2 2 . . . 2 2 . . . . 
+        . . . . . 2 2 . 2 2 . . . . . 
+        . . . . . . 2 2 2 . . . . . . 
+        . . . . . . . 2 . . . . . . . 
+        `,img`
+        . . . . . . . 2 . . . . . . . 
+        . . . . . . 2 . 2 . . . . . . 
+        . . . . . 2 . . . 2 . . . . . 
+        . . . . 2 . . . . . 2 . . . . 
+        . . . 2 . . . . . . . 2 . . . 
+        . . 2 . . . . . . . . . 2 . . 
+        . 2 . . . . . . . . . . . 2 . 
+        2 . . . . . . . . . . . . . 2 
+        . 2 . . . . . . . . . . . 2 . 
+        . . 2 . . . . . . . . . 2 . . 
+        . . . 2 . . . . . . . 2 . . . 
+        . . . . 2 . . . . . 2 . . . . 
+        . . . . . 2 . . . 2 . . . . . 
+        . . . . . . 2 . 2 . . . . . . 
+        . . . . . . . 2 . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . 
+        `],
+    50,
+    false
+    )
+})
 statusbars.onZero(StatusBarKind.Energy, function (status) {
     game.over(false)
 })
@@ -121,7 +340,7 @@ sprites.onOverlap(SpriteKind.Boss, SpriteKind.Projectile, function (sprite, othe
     } else {
         statusbar2.value += -100
         music.smallCrash.play()
-        sprite.startEffect(effects.disintegrate, 1000)
+        sprite.startEffect(effects.fire, 1000)
     }
 })
 function startLevelTwo () {
@@ -147,13 +366,11 @@ function startLevelTwo () {
     mySprite.setStayInScreen(true)
     statusbar = statusbars.create(20, 4, StatusBarKind.Energy)
     statusbar.attachToSprite(mySprite, -23, 0)
-    info.setScore(0)
     info.setLife(3)
-    game.splash("Welcome Player to David's Game")
-    game.splash("To play: Use the arrow keys to move and the a button(space bar) to shoot missles at the aliens")
+    game.splash("Start Level 2")
+    game.splash("Destroy the Final Boss to Complete the Game")
     Epoch = 0
-    Level = 0
-    Level += 1
+    Level = 2
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     info.changeLifeBy(-1)
@@ -165,6 +382,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Boss, function (sprite, otherSpr
 })
 let L1Boss: Sprite = null
 let projectile2: Sprite = null
+let Level1Finish = 0
 let Level1Boss = 0
 let BossLife1 = 0
 let myEnemy: Sprite = null
@@ -218,7 +436,14 @@ game.onUpdateInterval(1000, function () {
 })
 game.onUpdateInterval(1000, function () {
     if (BossLife1 == 1) {
-        tiles.destroySpritesOfKind(SpriteKind.EnemyFire)
+        if (Level1Finish == 0) {
+            tiles.destroySpritesOfKind(SpriteKind.EnemyFire)
+            tiles.destroySpritesOfKind(SpriteKind.Enemy)
+            tiles.destroySpritesOfKind(SpriteKind.Boss)
+            mySprite.destroy()
+            Level1Finish = 1
+            startLevelTwo()
+        }
     } else if (Level1Boss == 1) {
         projectile2 = sprites.createProjectileFromSprite(assets.image`myImage5`, L1Boss, 0, 100)
         projectile2.setKind(SpriteKind.EnemyFire)
@@ -282,6 +507,7 @@ game.onUpdateInterval(500, function () {
         L1Boss.y = 23
         statusbar2 = statusbars.create(20, 4, StatusBarKind.Health)
         statusbar2.attachToSprite(L1Boss, -65, 0)
+        statusbar2.max = 2000
         statusbar2.value = 2000
         Level1Boss = 1
     } else if (BossHealth == 1) {
