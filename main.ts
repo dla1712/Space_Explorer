@@ -2,7 +2,12 @@ namespace SpriteKind {
     export const Gas = SpriteKind.create()
     export const Boss = SpriteKind.create()
     export const EnemyFire = SpriteKind.create()
+    export const Boss2 = SpriteKind.create()
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Gas, function (sprite3, otherSprite3) {
+    statusbar.value = 100
+    otherSprite3.destroy()
+})
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     mySprite.setImage(img`
         . . . . . . . 8 8 . . . . . . . 
@@ -25,6 +30,235 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     rx = 0
     ry = -150
 })
+sprites.onOverlap(SpriteKind.Boss2, SpriteKind.Projectile, function (sprite, otherSprite) {
+    if (statusbar3.value == 0 && Level == 2) {
+        animation.runImageAnimation(
+        L2Boss,
+        [img`
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . 5 5 5 . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . 5 5 5 . . . . . . 
+            . . . . . 5 5 4 5 5 . . . . . 
+            . . . . . . 5 5 5 . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . 5 5 5 . . . . . . 
+            . . . . . 5 5 4 5 5 . . . . . 
+            . . . . 5 5 4 4 4 5 5 . . . . 
+            . . . . . 5 5 4 5 5 . . . . . 
+            . . . . . . 5 5 5 . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . 5 5 5 . . . . . . 
+            . . . . . 5 5 4 5 5 . . . . . 
+            . . . . 5 5 4 4 4 5 5 . . . . 
+            . . . 5 5 4 4 2 4 4 5 5 . . . 
+            . . . . 5 5 4 4 4 5 5 . . . . 
+            . . . . . 5 5 4 5 5 . . . . . 
+            . . . . . . 5 5 5 . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . 5 5 5 . . . . . . 
+            . . . . . 5 5 4 5 5 . . . . . 
+            . . . . 5 5 4 4 4 5 5 . . . . 
+            . . . 5 5 4 4 2 4 4 5 5 . . . 
+            . . 5 5 4 4 2 2 2 4 4 5 5 . . 
+            . . . 5 5 4 4 2 4 4 5 5 . . . 
+            . . . . 5 5 4 4 4 5 5 . . . . 
+            . . . . . 5 5 4 5 5 . . . . . 
+            . . . . . . 5 5 5 . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . 5 5 5 . . . . . . 
+            . . . . . 5 5 4 5 5 . . . . . 
+            . . . . 5 5 4 4 4 5 5 . . . . 
+            . . . 5 5 4 4 2 4 4 5 5 . . . 
+            . . 5 5 4 4 2 2 2 4 4 5 5 . . 
+            . 5 5 4 4 2 2 . 2 2 4 4 5 5 . 
+            . . 5 5 4 4 2 2 2 4 4 5 5 . . 
+            . . . 5 5 4 4 2 4 4 5 5 . . . 
+            . . . . 5 5 4 4 4 5 5 . . . . 
+            . . . . . 5 5 4 5 5 . . . . . 
+            . . . . . . 5 5 5 . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            `,img`
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . 5 5 5 . . . . . . 
+            . . . . . 5 5 4 5 5 . . . . . 
+            . . . . 5 5 4 4 4 5 5 . . . . 
+            . . . 5 5 4 4 2 4 4 5 5 . . . 
+            . . 5 5 4 4 2 2 2 4 4 5 5 . . 
+            . 5 5 4 4 2 2 . 2 2 4 4 5 5 . 
+            5 5 4 4 2 2 . . . 2 2 4 4 5 5 
+            . 5 5 4 4 2 2 . 2 2 4 4 5 5 . 
+            . . 5 5 4 4 2 2 2 4 4 5 5 . . 
+            . . . 5 5 4 4 2 4 4 5 5 . . . 
+            . . . . 5 5 4 4 4 5 5 . . . . 
+            . . . . . 5 5 4 5 5 . . . . . 
+            . . . . . . 5 5 5 . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            `,img`
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . 5 4 5 . . . . . . 
+            . . . . . 5 4 4 4 5 . . . . . 
+            . . . . 5 4 4 2 4 4 5 . . . . 
+            . . . 5 4 4 2 2 2 4 4 5 . . . 
+            . . 5 4 4 2 2 . 2 2 4 4 5 . . 
+            . 5 4 4 2 2 . . . 2 2 4 4 5 . 
+            5 4 4 2 2 . . . . . 2 2 4 4 5 
+            . 5 4 4 2 2 . . . 2 2 4 4 5 . 
+            . . 5 4 4 2 2 . 2 2 4 4 5 . . 
+            . . . 5 4 4 2 2 2 4 4 5 . . . 
+            . . . . 5 4 4 2 4 4 5 . . . . 
+            . . . . . 5 4 4 4 5 . . . . . 
+            . . . . . . 5 4 5 . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            `,img`
+            . . . . . . . 4 . . . . . . . 
+            . . . . . . 4 4 4 . . . . . . 
+            . . . . . 4 4 2 4 4 . . . . . 
+            . . . . 4 4 2 2 2 4 4 . . . . 
+            . . . 4 4 2 2 . 2 2 4 4 . . . 
+            . . 4 4 2 2 . . . 2 2 4 4 . . 
+            . 4 4 2 2 . . . . . 2 2 4 4 . 
+            4 4 2 2 . . . . . . . 2 2 4 4 
+            . 4 4 2 2 . . . . . 2 2 4 4 . 
+            . . 4 4 2 2 . . . 2 2 4 4 . . 
+            . . . 4 4 2 2 . 2 2 4 4 . . . 
+            . . . . 4 4 2 2 2 4 4 . . . . 
+            . . . . . 4 4 2 4 4 . . . . . 
+            . . . . . . 4 4 4 . . . . . . 
+            . . . . . . . 4 . . . . . . . 
+            `,img`
+            . . . . . . . 4 . . . . . . . 
+            . . . . . . 4 2 4 . . . . . . 
+            . . . . . 4 2 2 2 4 . . . . . 
+            . . . . 4 2 2 . 2 2 4 . . . . 
+            . . . 4 2 2 . . . 2 2 4 . . . 
+            . . 4 2 2 . . . . . 2 2 4 . . 
+            . 4 2 2 . . . . . . . 2 2 4 . 
+            4 2 2 . . . . . . . . . 2 2 4 
+            . 4 2 2 . . . . . . . 2 2 4 . 
+            . . 4 2 2 . . . . . 2 2 4 . . 
+            . . . 4 2 2 . . . 2 2 4 . . . 
+            . . . . 4 2 2 . 2 2 4 . . . . 
+            . . . . . 4 2 2 2 4 . . . . . 
+            . . . . . . 4 2 4 . . . . . . 
+            . . . . . . . 4 . . . . . . . 
+            `,img`
+            . . . . . . . 2 . . . . . . . 
+            . . . . . . 2 2 2 . . . . . . 
+            . . . . . 2 2 . 2 2 . . . . . 
+            . . . . 2 2 . . . 2 2 . . . . 
+            . . . 2 2 . . . . . 2 2 . . . 
+            . . 2 2 . . . . . . . 2 2 . . 
+            . 2 2 . . . . . . . . . 2 2 . 
+            2 2 . . . . . . . . . . . 2 2 
+            . 2 2 . . . . . . . . . 2 2 . 
+            . . 2 2 . . . . . . . 2 2 . . 
+            . . . 2 2 . . . . . 2 2 . . . 
+            . . . . 2 2 . . . 2 2 . . . . 
+            . . . . . 2 2 . 2 2 . . . . . 
+            . . . . . . 2 2 2 . . . . . . 
+            . . . . . . . 2 . . . . . . . 
+            `,img`
+            . . . . . . . 2 . . . . . . . 
+            . . . . . . 2 . 2 . . . . . . 
+            . . . . . 2 . . . 2 . . . . . 
+            . . . . 2 . . . . . 2 . . . . 
+            . . . 2 . . . . . . . 2 . . . 
+            . . 2 . . . . . . . . . 2 . . 
+            . 2 . . . . . . . . . . . 2 . 
+            2 . . . . . . . . . . . . . 2 
+            . 2 . . . . . . . . . . . 2 . 
+            . . 2 . . . . . . . . . 2 . . 
+            . . . 2 . . . . . . . 2 . . . 
+            . . . . 2 . . . . . 2 . . . . 
+            . . . . . 2 . . . 2 . . . . . 
+            . . . . . . 2 . 2 . . . . . . 
+            . . . . . . . 2 . . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            `],
+        50,
+        true
+        )
+        pause(1000)
+        L2Boss.destroy()
+        pause(1000)
+        BossHealth2 = 1
+        music.bigCrash.play()
+    } else if (BossHealth2 == 1) {
+        game.over(true)
+    } else if (Level == 2) {
+        statusbar3.value += -10
+        music.smallCrash.play()
+        sprite.startEffect(effects.fire, 1000)
+    }
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     music.pewPew.play()
     if (direction == 1) {
@@ -45,6 +279,10 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         pause(200)
     }
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite6, otherSprite6) {
+    info.changeLifeBy(-1)
+    otherSprite6.destroy(effects.disintegrate, 200)
+})
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     mySprite.setImage(assets.image`myImage1`)
     direction = 1
@@ -56,11 +294,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.EnemyFire, function (sprite, oth
     music.bigCrash.play()
     music.setVolume(255)
     pause(1000)
-})
-sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite, otherSprite) {
-    sprite.destroy(effects.disintegrate, 500)
-    otherSprite.destroy(effects.fire, 500)
-    info.changeScoreBy(1000)
 })
 function startNextLevel () {
     effects.starField.startScreenEffect()
@@ -87,11 +320,10 @@ function startNextLevel () {
     statusbar.attachToSprite(mySprite, -23, 0)
     info.setScore(0)
     info.setLife(3)
-    game.splash("Welcome Player to David's Game")
-    game.splash("To play: Use the arrow keys to move and the a button(space bar) to shoot missles at the aliens")
+    game.splash("Welcome, Player to David's Game")
+    game.splash("To play: Use the arrow keys to move ", "The a button(space bar) to shoot missles at the aliens")
     Epoch = 0
-    Level = 0
-    Level += 1
+    Level = 1
 }
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     mySprite.setImage(assets.image`myImage2`)
@@ -99,21 +331,16 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     rx = 150
     ry = 0
 })
-controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
-    mySprite.setImage(assets.image`myImage3`)
-    direction = 4
-    rx = 0
-    ry = 150
+sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite2, otherSprite2) {
+    sprite2.destroy(effects.disintegrate, 500)
+    otherSprite2.destroy(effects.fire, 500)
+    info.changeScoreBy(1000)
 })
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Gas, function (sprite, otherSprite) {
-    statusbar.value = 100
-    otherSprite.destroy()
-})
-sprites.onOverlap(SpriteKind.Projectile, SpriteKind.EnemyFire, function (sprite, otherSprite) {
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.EnemyFire, function (sprite4, otherSprite4) {
     tiles.destroySpritesOfKind(SpriteKind.EnemyFire)
     tiles.destroySpritesOfKind(SpriteKind.Projectile)
     animation.runImageAnimation(
-    sprite,
+    sprite4,
     [img`
         . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . 
@@ -327,13 +554,20 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.EnemyFire, function (sprite,
     false
     )
 })
-statusbars.onZero(StatusBarKind.Energy, function (status) {
-    game.over(false)
+controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
+    mySprite.setImage(assets.image`myImage3`)
+    direction = 4
+    rx = 0
+    ry = 150
 })
-sprites.onOverlap(SpriteKind.Boss, SpriteKind.Projectile, function (sprite, otherSprite) {
-    if (statusbar2.value == 0) {
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Boss, function (sprite7, otherSprite7) {
+    info.changeLifeBy(-3)
+    otherSprite7.destroy(effects.disintegrate, 200)
+})
+sprites.onOverlap(SpriteKind.Boss, SpriteKind.Projectile, function (sprite5, otherSprite5) {
+    if (statusbar2.value == 0 && Level == 1) {
         animation.runImageAnimation(
-        sprite,
+        sprite5,
         [img`
             . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . 
@@ -544,19 +778,21 @@ sprites.onOverlap(SpriteKind.Boss, SpriteKind.Projectile, function (sprite, othe
             . . . . . . . . . . . . . . . 
             `],
         50,
-        false
+        true
         )
-        sprite.destroy()
+        pause(1000)
+        sprite5.destroy()
         pause(1000)
         BossHealth = 1
         music.bigCrash.play()
-    } else if (BossHealth == 1) {
-        startLevelTwo()
     } else {
         statusbar2.value += -10
         music.smallCrash.play()
-        sprite.startEffect(effects.fire, 1000)
+        sprite5.startEffect(effects.fire, 1000)
     }
+})
+statusbars.onZero(StatusBarKind.Energy, function (status) {
+    game.over(false)
 })
 function startLevelTwo () {
     effects.starField.startScreenEffect()
@@ -588,32 +824,29 @@ function startLevelTwo () {
     Level = 2
     IsEnemy = 0
 }
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
-    info.changeLifeBy(-1)
-    otherSprite.destroy(effects.disintegrate, 200)
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Boss, function (sprite, otherSprite) {
-    info.changeLifeBy(-3)
-    otherSprite.destroy(effects.disintegrate, 200)
-})
 let projectile2: Sprite = null
 let Level1Finish = 0
 let BossLife1 = 0
 let Level1Boss = 0
 let L1Boss: Sprite = null
 let myEnemy: Sprite = null
+let BossLife2 = 0
+let Level2Boss = 0
 let myFuel: Sprite = null
 let IsEnemy = 0
 let BossHealth = 0
 let statusbar2: StatusBarSprite = null
-let Level = 0
 let Epoch = 0
-let statusbar: StatusBarSprite = null
 let projectile: Sprite = null
+let L2Boss: Sprite = null
+let BossHealth2 = 0
+let Level = 0
+let statusbar3: StatusBarSprite = null
 let ry = 0
 let rx = 0
 let direction = 0
 let mySprite: Sprite = null
+let statusbar: StatusBarSprite = null
 startNextLevel()
 game.onUpdateInterval(5000, function () {
     myFuel = sprites.createProjectileFromSide(img`
@@ -630,6 +863,23 @@ game.onUpdateInterval(5000, function () {
         `, 0, 50)
     myFuel.x = randint(5, 155)
     myFuel.setKind(SpriteKind.Gas)
+})
+game.onUpdateInterval(1000, function () {
+    if (Epoch == 15 && Level == 2) {
+        L2Boss = sprites.createProjectileFromSide(assets.image`myImage9`, 0, 0)
+        L2Boss.setKind(SpriteKind.Boss2)
+        L2Boss.x = 80
+        L2Boss.y = 23
+        statusbar3 = statusbars.create(20, 4, StatusBarKind.Health)
+        statusbar3.max = 2000
+        statusbar3.value = 2000
+        Level2Boss = 1
+        IsEnemy = 1
+        game.splash("Oh no! It's the Final Boss!", "The Alien Fathership")
+        game.splash("Defeat this boss to finish the game")
+    } else if (BossHealth2 == 1) {
+        BossLife2 = 1
+    }
 })
 game.onUpdateInterval(1000, function () {
     myEnemy = sprites.createProjectileFromSide(img`
@@ -649,12 +899,8 @@ game.onUpdateInterval(1000, function () {
     myEnemy.setKind(SpriteKind.Enemy)
 })
 game.onUpdateInterval(1000, function () {
-    Epoch += 1
-})
-game.onUpdateInterval(1000, function () {
-    if (Epoch == 2 && Level == 1) {
+    if (Epoch == 15 && Level == 1) {
         L1Boss = sprites.createProjectileFromSide(img`
-            ....................................................................................................
             .........................22222222222222222222222222222222222222222222222222.........................
             .........................22222222222222222222222222222222222222222222222222.........................
             .........................22222222222222222222222222222222222222222222222222.........................
@@ -679,7 +925,7 @@ game.onUpdateInterval(1000, function () {
             .....222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222.....
             .....222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222.....
             .....222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222.....
-            .....222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222.....
+            .....22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
             2222222222222222222211111222222222221111122222222222222222211111222222222221111122222222222222222222
             2222222222222222222211111222222222221111122222222222222222211111222222222221111122222222222222222222
             2222222222222222222211111222222222221111122222222222222222211111222222222221111122222222222222222222
@@ -689,13 +935,12 @@ game.onUpdateInterval(1000, function () {
             2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
             2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
             2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
-            2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+            22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222.....
             .....222222222222222.........................2222222222.........................222222222222222.....
             .....222222222222222.........................2222222222.........................222222222222222.....
             .....222222222222222.........................2222222222.........................222222222222222.....
             .....222222222222222.........................2222222222.........................222222222222222.....
             .....222222222222222.........................2222222222.........................222222222222222.....
-            ..........22222......................................................................22222..........
             ..........22222......................................................................22222..........
             ..........22222......................................................................22222..........
             ..........22222......................................................................22222..........
@@ -715,6 +960,9 @@ game.onUpdateInterval(1000, function () {
     } else if (BossHealth == 1) {
         BossLife1 = 1
     }
+})
+game.onUpdateInterval(1000, function () {
+    Epoch += 1
 })
 game.onUpdateInterval(1000, function () {
     if (BossLife1 == 1) {
@@ -737,6 +985,19 @@ game.onUpdateInterval(1000, function () {
 forever(function () {
     if (IsEnemy == 1) {
         tiles.destroySpritesOfKind(SpriteKind.Enemy)
+    }
+})
+game.onUpdateInterval(500, function () {
+    if (BossLife2 == 1) {
+        if (BossHealth2 == 1) {
+            game.over(true)
+        }
+    } else if (Level2Boss == 1) {
+        projectile2 = sprites.createProjectileFromSprite(assets.image`myImage5`, L1Boss, 0, 100)
+        projectile2.setKind(SpriteKind.EnemyFire)
+        projectile2.x = randint(5, 155)
+        projectile2.startEffect(effects.spray)
+        pause(200)
     }
 })
 game.onUpdateInterval(300, function () {

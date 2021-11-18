@@ -1,6 +1,6 @@
 {
-    "name": "Fuel Up #2",
-    "version": "1.2.0",
+    "name": "David's Game Design Assessment",
+    "version": "1.1.1",
     "description": "",
     "dependencies": {
         "device": "*",
@@ -16,7 +16,8 @@
         "images.g.ts",
         "tilemap.g.jres",
         "tilemap.g.ts",
-        "tutorial-info-cache.json"
+        "tutorial-info-cache.json",
+        "main.py"
     ],
     "testFiles": [
         "test.ts"
