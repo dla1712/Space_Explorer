@@ -7,6 +7,7 @@ namespace SpriteKind {
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Gas, function (sprite3, otherSprite3) {
     statusbar.value = 100
     otherSprite3.destroy()
+    GasCans += 1
 })
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     mySprite.setImage(img`
@@ -251,6 +252,8 @@ sprites.onOverlap(SpriteKind.Boss2, SpriteKind.Projectile, function (sprite, oth
         pause(1000)
         BossHealth2 = 1
         music.bigCrash.play()
+        info.changeScoreBy(10000)
+        Score += 10000
     } else if (BossHealth2 == 1) {
         game.over(true)
     } else if (Level == 2) {
@@ -279,23 +282,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         pause(200)
     }
 })
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite6, otherSprite6) {
-    info.changeLifeBy(-1)
-    otherSprite6.destroy(effects.disintegrate, 200)
-})
-controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    mySprite.setImage(assets.image`myImage1`)
-    direction = 1
-    rx = -150
-    ry = 0
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.EnemyFire, function (sprite, otherSprite) {
-    info.changeLifeBy(-1)
-    music.bigCrash.play()
-    music.setVolume(255)
-    pause(1000)
-})
-function startNextLevel () {
+function startLevel1 () {
     effects.starField.startScreenEffect()
     mySprite = sprites.create(img`
         . . . . . . . 8 8 . . . . . . . 
@@ -324,6 +311,34 @@ function startNextLevel () {
     game.splash("To play: Use the arrow keys to move ", "The a button(space bar) to shoot missles at the aliens")
     Epoch = 0
     Level = 1
+    GasCans = 0
+    Score = 0
+    EndCommand = 0
+}
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite6, otherSprite6) {
+    info.changeLifeBy(-1)
+    otherSprite6.destroy(effects.disintegrate, 200)
+    GasCans += 1
+})
+controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
+    mySprite.setImage(assets.image`myImage1`)
+    direction = 1
+    rx = -150
+    ry = 0
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.EnemyFire, function (sprite, otherSprite) {
+    info.changeLifeBy(-1)
+    music.bigCrash.play()
+    music.setVolume(255)
+    pause(1000)
+})
+function easteregg () {
+    if (EndCommand == 0) {
+        game.splash("Good Job!", "You found my secret egg")
+        game.splash("Here's 30000 points for your trouble")
+        info.changeScoreBy(30000)
+        EndCommand = 1
+    }
 }
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     mySprite.setImage(assets.image`myImage2`)
@@ -335,6 +350,7 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite2, ot
     sprite2.destroy(effects.disintegrate, 500)
     otherSprite2.destroy(effects.fire, 500)
     info.changeScoreBy(1000)
+    Score += 1000
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.EnemyFire, function (sprite4, otherSprite4) {
     tiles.destroySpritesOfKind(SpriteKind.EnemyFire)
@@ -785,6 +801,8 @@ sprites.onOverlap(SpriteKind.Boss, SpriteKind.Projectile, function (sprite5, oth
         pause(1000)
         BossHealth = 1
         music.bigCrash.play()
+        info.changeScoreBy(10000)
+        Score += 10000
     } else {
         statusbar2.value += -10
         music.smallCrash.play()
@@ -840,8 +858,10 @@ let myFuel: Sprite = null
 let IsEnemy = 0
 let BossHealth = 0
 let statusbar2: StatusBarSprite = null
+let EndCommand = 0
 let Epoch = 0
 let projectile: Sprite = null
+let Score = 0
 let L2Boss: Sprite = null
 let BossHealth2 = 0
 let Level = 0
@@ -850,8 +870,9 @@ let ry = 0
 let rx = 0
 let direction = 0
 let mySprite: Sprite = null
+let GasCans = 0
 let statusbar: StatusBarSprite = null
-startNextLevel()
+startLevel1()
 game.onUpdateInterval(5000, function () {
     myFuel = sprites.createProjectileFromSide(img`
         . . . f f f f . . . 
@@ -869,7 +890,7 @@ game.onUpdateInterval(5000, function () {
     myFuel.setKind(SpriteKind.Gas)
 })
 game.onUpdateInterval(1000, function () {
-    if (Epoch == 15 && Level == 2) {
+    if (Epoch == 20 && Level == 2) {
         L2Boss = sprites.createProjectileFromSide(assets.image`myImage9`, 0, 0)
         L2Boss.setKind(SpriteKind.Boss2)
         L2Boss.x = 80
@@ -903,7 +924,7 @@ game.onUpdateInterval(1000, function () {
     myEnemy.setKind(SpriteKind.Enemy)
 })
 game.onUpdateInterval(1000, function () {
-    if (Epoch == 15 && Level == 1) {
+    if (Epoch == 20 && Level == 1) {
         L1Boss = sprites.createProjectileFromSide(img`
             .........................22222222222222222222222222222222222222222222222222.........................
             .........................22222222222222222222222222222222222222222222222222.........................
@@ -989,6 +1010,11 @@ game.onUpdateInterval(1000, function () {
 forever(function () {
     if (IsEnemy == 1) {
         tiles.destroySpritesOfKind(SpriteKind.Enemy)
+    }
+})
+game.onUpdateInterval(500, function () {
+    if (Score == 7000 && GasCans > 1) {
+        easteregg()
     }
 })
 game.onUpdateInterval(500, function () {
