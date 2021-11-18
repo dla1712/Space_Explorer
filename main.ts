@@ -113,7 +113,7 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.EnemyFire, function (sprite,
     tiles.destroySpritesOfKind(SpriteKind.EnemyFire)
     tiles.destroySpritesOfKind(SpriteKind.Projectile)
     animation.runImageAnimation(
-    projectile,
+    sprite,
     [img`
         . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . 
@@ -332,13 +332,228 @@ statusbars.onZero(StatusBarKind.Energy, function (status) {
 })
 sprites.onOverlap(SpriteKind.Boss, SpriteKind.Projectile, function (sprite, otherSprite) {
     if (statusbar2.value == 0) {
-        sprite.destroy(effects.fire, 5000)
+        animation.runImageAnimation(
+        sprite,
+        [img`
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . 5 5 5 . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . 5 5 5 . . . . . . 
+            . . . . . 5 5 4 5 5 . . . . . 
+            . . . . . . 5 5 5 . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . 5 5 5 . . . . . . 
+            . . . . . 5 5 4 5 5 . . . . . 
+            . . . . 5 5 4 4 4 5 5 . . . . 
+            . . . . . 5 5 4 5 5 . . . . . 
+            . . . . . . 5 5 5 . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . 5 5 5 . . . . . . 
+            . . . . . 5 5 4 5 5 . . . . . 
+            . . . . 5 5 4 4 4 5 5 . . . . 
+            . . . 5 5 4 4 2 4 4 5 5 . . . 
+            . . . . 5 5 4 4 4 5 5 . . . . 
+            . . . . . 5 5 4 5 5 . . . . . 
+            . . . . . . 5 5 5 . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . 5 5 5 . . . . . . 
+            . . . . . 5 5 4 5 5 . . . . . 
+            . . . . 5 5 4 4 4 5 5 . . . . 
+            . . . 5 5 4 4 2 4 4 5 5 . . . 
+            . . 5 5 4 4 2 2 2 4 4 5 5 . . 
+            . . . 5 5 4 4 2 4 4 5 5 . . . 
+            . . . . 5 5 4 4 4 5 5 . . . . 
+            . . . . . 5 5 4 5 5 . . . . . 
+            . . . . . . 5 5 5 . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . 5 5 5 . . . . . . 
+            . . . . . 5 5 4 5 5 . . . . . 
+            . . . . 5 5 4 4 4 5 5 . . . . 
+            . . . 5 5 4 4 2 4 4 5 5 . . . 
+            . . 5 5 4 4 2 2 2 4 4 5 5 . . 
+            . 5 5 4 4 2 2 . 2 2 4 4 5 5 . 
+            . . 5 5 4 4 2 2 2 4 4 5 5 . . 
+            . . . 5 5 4 4 2 4 4 5 5 . . . 
+            . . . . 5 5 4 4 4 5 5 . . . . 
+            . . . . . 5 5 4 5 5 . . . . . 
+            . . . . . . 5 5 5 . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            `,img`
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . 5 5 5 . . . . . . 
+            . . . . . 5 5 4 5 5 . . . . . 
+            . . . . 5 5 4 4 4 5 5 . . . . 
+            . . . 5 5 4 4 2 4 4 5 5 . . . 
+            . . 5 5 4 4 2 2 2 4 4 5 5 . . 
+            . 5 5 4 4 2 2 . 2 2 4 4 5 5 . 
+            5 5 4 4 2 2 . . . 2 2 4 4 5 5 
+            . 5 5 4 4 2 2 . 2 2 4 4 5 5 . 
+            . . 5 5 4 4 2 2 2 4 4 5 5 . . 
+            . . . 5 5 4 4 2 4 4 5 5 . . . 
+            . . . . 5 5 4 4 4 5 5 . . . . 
+            . . . . . 5 5 4 5 5 . . . . . 
+            . . . . . . 5 5 5 . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            `,img`
+            . . . . . . . 5 . . . . . . . 
+            . . . . . . 5 4 5 . . . . . . 
+            . . . . . 5 4 4 4 5 . . . . . 
+            . . . . 5 4 4 2 4 4 5 . . . . 
+            . . . 5 4 4 2 2 2 4 4 5 . . . 
+            . . 5 4 4 2 2 . 2 2 4 4 5 . . 
+            . 5 4 4 2 2 . . . 2 2 4 4 5 . 
+            5 4 4 2 2 . . . . . 2 2 4 4 5 
+            . 5 4 4 2 2 . . . 2 2 4 4 5 . 
+            . . 5 4 4 2 2 . 2 2 4 4 5 . . 
+            . . . 5 4 4 2 2 2 4 4 5 . . . 
+            . . . . 5 4 4 2 4 4 5 . . . . 
+            . . . . . 5 4 4 4 5 . . . . . 
+            . . . . . . 5 4 5 . . . . . . 
+            . . . . . . . 5 . . . . . . . 
+            `,img`
+            . . . . . . . 4 . . . . . . . 
+            . . . . . . 4 4 4 . . . . . . 
+            . . . . . 4 4 2 4 4 . . . . . 
+            . . . . 4 4 2 2 2 4 4 . . . . 
+            . . . 4 4 2 2 . 2 2 4 4 . . . 
+            . . 4 4 2 2 . . . 2 2 4 4 . . 
+            . 4 4 2 2 . . . . . 2 2 4 4 . 
+            4 4 2 2 . . . . . . . 2 2 4 4 
+            . 4 4 2 2 . . . . . 2 2 4 4 . 
+            . . 4 4 2 2 . . . 2 2 4 4 . . 
+            . . . 4 4 2 2 . 2 2 4 4 . . . 
+            . . . . 4 4 2 2 2 4 4 . . . . 
+            . . . . . 4 4 2 4 4 . . . . . 
+            . . . . . . 4 4 4 . . . . . . 
+            . . . . . . . 4 . . . . . . . 
+            `,img`
+            . . . . . . . 4 . . . . . . . 
+            . . . . . . 4 2 4 . . . . . . 
+            . . . . . 4 2 2 2 4 . . . . . 
+            . . . . 4 2 2 . 2 2 4 . . . . 
+            . . . 4 2 2 . . . 2 2 4 . . . 
+            . . 4 2 2 . . . . . 2 2 4 . . 
+            . 4 2 2 . . . . . . . 2 2 4 . 
+            4 2 2 . . . . . . . . . 2 2 4 
+            . 4 2 2 . . . . . . . 2 2 4 . 
+            . . 4 2 2 . . . . . 2 2 4 . . 
+            . . . 4 2 2 . . . 2 2 4 . . . 
+            . . . . 4 2 2 . 2 2 4 . . . . 
+            . . . . . 4 2 2 2 4 . . . . . 
+            . . . . . . 4 2 4 . . . . . . 
+            . . . . . . . 4 . . . . . . . 
+            `,img`
+            . . . . . . . 2 . . . . . . . 
+            . . . . . . 2 2 2 . . . . . . 
+            . . . . . 2 2 . 2 2 . . . . . 
+            . . . . 2 2 . . . 2 2 . . . . 
+            . . . 2 2 . . . . . 2 2 . . . 
+            . . 2 2 . . . . . . . 2 2 . . 
+            . 2 2 . . . . . . . . . 2 2 . 
+            2 2 . . . . . . . . . . . 2 2 
+            . 2 2 . . . . . . . . . 2 2 . 
+            . . 2 2 . . . . . . . 2 2 . . 
+            . . . 2 2 . . . . . 2 2 . . . 
+            . . . . 2 2 . . . 2 2 . . . . 
+            . . . . . 2 2 . 2 2 . . . . . 
+            . . . . . . 2 2 2 . . . . . . 
+            . . . . . . . 2 . . . . . . . 
+            `,img`
+            . . . . . . . 2 . . . . . . . 
+            . . . . . . 2 . 2 . . . . . . 
+            . . . . . 2 . . . 2 . . . . . 
+            . . . . 2 . . . . . 2 . . . . 
+            . . . 2 . . . . . . . 2 . . . 
+            . . 2 . . . . . . . . . 2 . . 
+            . 2 . . . . . . . . . . . 2 . 
+            2 . . . . . . . . . . . . . 2 
+            . 2 . . . . . . . . . . . 2 . 
+            . . 2 . . . . . . . . . 2 . . 
+            . . . 2 . . . . . . . 2 . . . 
+            . . . . 2 . . . . . 2 . . . . 
+            . . . . . 2 . . . 2 . . . . . 
+            . . . . . . 2 . 2 . . . . . . 
+            . . . . . . . 2 . . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            `],
+        50,
+        false
+        )
+        sprite.destroy()
+        pause(1000)
         BossHealth = 1
         music.bigCrash.play()
     } else if (BossHealth == 1) {
         startLevelTwo()
     } else {
-        statusbar2.value += -1
+        statusbar2.value += -10
         music.smallCrash.play()
         sprite.startEffect(effects.fire, 1000)
     }
@@ -381,11 +596,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Boss, function (sprite, otherSpr
     info.changeLifeBy(-3)
     otherSprite.destroy(effects.disintegrate, 200)
 })
-let L1Boss: Sprite = null
 let projectile2: Sprite = null
 let Level1Finish = 0
-let Level1Boss = 0
 let BossLife1 = 0
+let Level1Boss = 0
+let L1Boss: Sprite = null
 let myEnemy: Sprite = null
 let myFuel: Sprite = null
 let IsEnemy = 0
@@ -437,29 +652,6 @@ game.onUpdateInterval(1000, function () {
     Epoch += 1
 })
 game.onUpdateInterval(1000, function () {
-    if (BossLife1 == 1) {
-        if (Level1Finish == 0) {
-            tiles.destroySpritesOfKind(SpriteKind.EnemyFire)
-            tiles.destroySpritesOfKind(SpriteKind.Enemy)
-            tiles.destroySpritesOfKind(SpriteKind.Boss)
-            mySprite.destroy()
-            Level1Finish = 1
-            startLevelTwo()
-        }
-    } else if (Level1Boss == 1) {
-        projectile2 = sprites.createProjectileFromSprite(assets.image`myImage5`, L1Boss, 0, 100)
-        projectile2.setKind(SpriteKind.EnemyFire)
-        projectile2.x = randint(5, 155)
-        projectile2.startEffect(effects.spray)
-        pause(200)
-    }
-})
-forever(function () {
-    if (IsEnemy == 1) {
-        tiles.destroySpritesOfKind(SpriteKind.Enemy)
-    }
-})
-game.onUpdateInterval(500, function () {
     if (Epoch == 2 && Level == 1) {
         L1Boss = sprites.createProjectileFromSide(img`
             ....................................................................................................
@@ -518,10 +710,33 @@ game.onUpdateInterval(500, function () {
         statusbar2.value = 2000
         Level1Boss = 1
         IsEnemy = 1
-        game.splash("Oh no! It's the alien mothership")
+        game.splash("Oh no! It's the alien mothership!")
         game.splash("Defeat it to advance to the next level")
     } else if (BossHealth == 1) {
         BossLife1 = 1
+    }
+})
+game.onUpdateInterval(1000, function () {
+    if (BossLife1 == 1) {
+        if (Level1Finish == 0) {
+            tiles.destroySpritesOfKind(SpriteKind.EnemyFire)
+            tiles.destroySpritesOfKind(SpriteKind.Enemy)
+            tiles.destroySpritesOfKind(SpriteKind.Boss)
+            mySprite.destroy()
+            Level1Finish = 1
+            startLevelTwo()
+        }
+    } else if (Level1Boss == 1) {
+        projectile2 = sprites.createProjectileFromSprite(assets.image`myImage5`, L1Boss, 0, 100)
+        projectile2.setKind(SpriteKind.EnemyFire)
+        projectile2.x = randint(5, 155)
+        projectile2.startEffect(effects.spray)
+        pause(200)
+    }
+})
+forever(function () {
+    if (IsEnemy == 1) {
+        tiles.destroySpritesOfKind(SpriteKind.Enemy)
     }
 })
 game.onUpdateInterval(300, function () {
