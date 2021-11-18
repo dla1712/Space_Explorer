@@ -794,6 +794,10 @@ sprites.onOverlap(SpriteKind.Boss, SpriteKind.Projectile, function (sprite5, oth
 statusbars.onZero(StatusBarKind.Energy, function (status) {
     game.over(false)
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Boss2, function (sprite, otherSprite) {
+    info.changeLifeBy(-3)
+    otherSprite.destroy(effects.disintegrate, 200)
+})
 function startLevelTwo () {
     effects.starField.startScreenEffect()
     mySprite = sprites.create(img`
