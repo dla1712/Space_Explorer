@@ -338,7 +338,7 @@ sprites.onOverlap(SpriteKind.Boss, SpriteKind.Projectile, function (sprite, othe
     } else if (BossHealth == 1) {
         startLevelTwo()
     } else {
-        statusbar2.value += -100
+        statusbar2.value += -1
         music.smallCrash.play()
         sprite.startEffect(effects.fire, 1000)
     }
@@ -371,6 +371,7 @@ function startLevelTwo () {
     game.splash("Destroy the Final Boss to Complete the Game")
     Epoch = 0
     Level = 2
+    IsEnemy = 0
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     info.changeLifeBy(-1)
@@ -387,6 +388,7 @@ let Level1Boss = 0
 let BossLife1 = 0
 let myEnemy: Sprite = null
 let myFuel: Sprite = null
+let IsEnemy = 0
 let BossHealth = 0
 let statusbar2: StatusBarSprite = null
 let Level = 0
@@ -452,6 +454,11 @@ game.onUpdateInterval(1000, function () {
         pause(200)
     }
 })
+forever(function () {
+    if (IsEnemy == 1) {
+        tiles.destroySpritesOfKind(SpriteKind.Enemy)
+    }
+})
 game.onUpdateInterval(500, function () {
     if (Epoch == 2 && Level == 1) {
         L1Boss = sprites.createProjectileFromSide(img`
@@ -510,6 +517,9 @@ game.onUpdateInterval(500, function () {
         statusbar2.max = 2000
         statusbar2.value = 2000
         Level1Boss = 1
+        IsEnemy = 1
+        game.splash("Oh no! It's the alien mothership")
+        game.splash("Defeat it to advance to the next level")
     } else if (BossHealth == 1) {
         BossLife1 = 1
     }
